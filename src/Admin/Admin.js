@@ -1,9 +1,11 @@
 // Admin.jsx
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import EmpDetail from "./EmpDetail ";
 
 const Admin = () => {
+  const location = useLocation();
+  const user = location.state && location.state.user;
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [employeeId, setEmployeeId] = useState('');
@@ -11,6 +13,14 @@ const Admin = () => {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [profileImage, setProfileImage] = useState(null);
+
+
+  useEffect(() => {
+    if (!user || user.email !== "Admin@gmail.com" || user.password !== "1212121212121212") {
+      navigate("/");
+    }
+  }, [navigate, user]);
+
 
   const handleCreateEmployee = async () => {
     try {

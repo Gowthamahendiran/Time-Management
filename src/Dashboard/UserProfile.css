@@ -18,6 +18,6 @@
   }
   
   .imagee {
-    max-width: 100%; /* Ensure image doesn't exceed its container */
+    max-width: 100px; /* Ensure image doesn't exceed its container */
   }
   
