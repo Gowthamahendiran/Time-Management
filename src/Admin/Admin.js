@@ -1,4 +1,3 @@
-// Admin.jsx
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import EmpDetail from "./EmpDetail ";
@@ -13,6 +12,7 @@ const Admin = () => {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [profileImage, setProfileImage] = useState(null);
+  const [adminMessage, setAdminMessage] = useState('');
 
 
   useEffect(() => {
@@ -53,6 +53,32 @@ const Admin = () => {
     setProfileImage(file);
   };
 
+  const handleAdminMessageChange = (event) => {
+    setAdminMessage(event.target.value);
+  };
+
+  const handleSendAdminMessage = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/admin/message', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: adminMessage }),
+      });
+
+      if (response.status === 201) {
+        console.log("Admin message sent successfully");
+        // Optionally, you can clear the message input field after sending
+        setAdminMessage('');
+      } else {
+        console.log("Error:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  };
+
   return (
     <div>
       <p>This is Admin Page!</p>
@@ -70,6 +96,19 @@ const Admin = () => {
         />
       </label>
       <button onClick={handleCreateEmployee}>Create an Employee</button> 
+      <br />
+      <div>
+        <h2>Send Admin Message</h2>
+        <textarea
+          value={adminMessage}
+          onChange={handleAdminMessageChange}
+          rows="4"
+          cols="50"
+          placeholder="Enter admin message..."
+        />
+        <br />
+        <button onClick={handleSendAdminMessage}>Send Message</button>
+      </div>
       <EmpDetail />
     </div>
   );

@@ -3,7 +3,7 @@ import './UserCard.css';
 
 const USerprofileCard = ({ children }) => {
     return (
-        <div className="login-card">
+        <div className="USer-profile">
             {children}
         </div>
     );

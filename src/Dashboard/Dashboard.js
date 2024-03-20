@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./Dashboard.css"; // Import the CSS file
 import TimeSheet from "./Timesheet";
 import UserProfile from "./UserProfile";
+import PathNote from "./PathNote";
+import LeaveReq from "./LeaveReq";
 
 const Dashboard = () => {
   const location = useLocation();
@@ -128,7 +130,12 @@ const Dashboard = () => {
 
   return (
     <div>
+      <div style={{ display: 'flex', flexDirection: 'row' }}>
       <UserProfile user= {user} />
+      <PathNote user = {user}/>
+      </div>
+
+
       <div className="dashboard-container">
         {timeIn && <p>Time In: {convertToIST(timeIn)}</p>}
         {!timeOutClicked && timeOut && (
