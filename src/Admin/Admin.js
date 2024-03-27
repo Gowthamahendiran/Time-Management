@@ -9,6 +9,7 @@ const Admin = () => {
   const [name, setName] = useState('');
   const [employeeId, setEmployeeId] = useState('');
   const [email, setEmail] = useState('');
+  const [category , SetCategory] = useState('User')
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [profileImage, setProfileImage] = useState(null);
@@ -16,7 +17,7 @@ const Admin = () => {
 
 
   useEffect(() => {
-    if (!user || user.email !== "Admin@gmail.com" || user.password !== "1212121212121212") {
+    if ( !user || !user.category || user.category !== 'Admin') {
       navigate("/");
     }
   }, [navigate, user]);
@@ -31,6 +32,7 @@ const Admin = () => {
       formData.append('password', password);
       formData.append('role', role);
       formData.append('profileImage', profileImage);
+      formData.append('category',category)
 
       const response = await fetch('http://localhost:3000/signup', {
         method: 'POST',
@@ -69,7 +71,6 @@ const Admin = () => {
 
       if (response.status === 201) {
         console.log("Admin message sent successfully");
-        // Optionally, you can clear the message input field after sending
         setAdminMessage('');
       } else {
         console.log("Error:", response.statusText);
@@ -81,12 +82,25 @@ const Admin = () => {
 
   return (
     <div>
-      <p>This is Admin Page!</p>
+      <h3>Hello {user.name}</h3>
+      <img src={`http://localhost:3000/${user.profileImage}`} alt="ProfileImage" style={{width: '300px'}}/>
+      <br />
       <input placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+      <br />
       <input placeholder="Employee ID" value={employeeId} onChange={(e) => setEmployeeId(e.target.value)} />
+      <br />
       <input placeholder="Email ID" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <br />
       <input placeholder="Role" value={role} onChange={(e) => setRole(e.target.value)} />
+      <br />
+      <label>Select Category</label>
+      <select value={category} onChange={(e) => SetCategory(e.target.value)}>
+        <option value="User">User</option>
+        <option value="Admin">Admin</option>
+      </select>
+      <br />
       <input placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <br />
       <label>
         Upload Profile Image:
         <input
@@ -95,6 +109,8 @@ const Admin = () => {
           onChange={handleProfileImageChange}
         />
       </label>
+      <br />
+      <br />
       <button onClick={handleCreateEmployee}>Create an Employee</button> 
       <br />
       <div>

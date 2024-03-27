@@ -23,14 +23,13 @@ const LoginPage = () => {
       if (response.ok) {
         console.log("Login successful");
         const userData = await response.json();
-        if (email === "Admin@gmail.com" && password === "1212121212121212") {
-          console.log("Email:", email);
-          console.log("Password:", password);
+
+        if (userData.user.category === 'Admin') {
           navigate("/Admin", { state: { user: userData.user } } );
-        } else {
-         
-            navigate("/dashboard", { state: { user: userData.user } });
-          
+        } else if (userData.user.category === 'SuperAdmin') {
+          navigate('/SuperAdmin' , { state: {user: userData.user}})
+        } else{
+          navigate("/dashboard", { state: { user: userData.user } });
         }
       } else {
         console.log("Error:", response.statusText);
@@ -43,7 +42,7 @@ const LoginPage = () => {
   return (
     <div className="login-page">
       <LoginCard>
-        <p>Login Page!</p>
+        <h2>Login Page!</h2>
         <input
           placeholder="Email ID"
           value={email}
