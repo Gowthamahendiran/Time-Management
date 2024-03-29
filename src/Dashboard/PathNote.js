@@ -3,8 +3,11 @@ import emailjs from "@emailjs/browser";
 import "./PathNote.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from "react-router-dom";
 
 const PathNote = ({ user }) => {
+  const navigate = useNavigate()
+
   const form = useRef();
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
@@ -82,13 +85,17 @@ const PathNote = ({ user }) => {
   const handleLeaveClose = () => {
     SetLeaveRequest(false);
   };
+
+  const handleAbout = () =>{
+    navigate('/dashboard/about' ,{ state: {user}})
+  }
   return (
     <div className="path-note-card">
       <div className="button-row">
         <button className="button-size" onClick={handleNewsClick}>
           Updates
         </button>
-        <button className="button-size">Task</button>
+        <button className="button-size" onClick={handleAbout}>About</button>
       </div>
       <div className="button-row">
         <button className="button-size">Schedule</button>

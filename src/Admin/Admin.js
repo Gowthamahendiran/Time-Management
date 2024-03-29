@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import EmpDetail from "./EmpDetail ";
 
 const Admin = () => {
   const location = useLocation();
@@ -13,14 +12,6 @@ const Admin = () => {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
   const [profileImage, setProfileImage] = useState(null);
-  const [adminMessage, setAdminMessage] = useState('');
-
-
-  useEffect(() => {
-    if ( !user || !user.category || user.category !== 'Admin') {
-      navigate("/");
-    }
-  }, [navigate, user]);
 
 
   const handleCreateEmployee = async () => {
@@ -55,35 +46,11 @@ const Admin = () => {
     setProfileImage(file);
   };
 
-  const handleAdminMessageChange = (event) => {
-    setAdminMessage(event.target.value);
-  };
-
-  const handleSendAdminMessage = async () => {
-    try {
-      const response = await fetch('http://localhost:3000/admin/message', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ message: adminMessage }),
-      });
-
-      if (response.status === 201) {
-        console.log("Admin message sent successfully");
-        setAdminMessage('');
-      } else {
-        console.log("Error:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error:", error.message);
-    }
-  };
-
   return (
     <div>
       <h3>Hello {user.name}</h3>
-      <img src={`http://localhost:3000/${user.profileImage}`} alt="ProfileImage" style={{width: '300px'}}/>
+      {/* <img src={`http://localhost:3000/${user.profileImage}`} alt="ProfileImage" style={{width: '300px'}}/> */}
+      <h3>Create a Employee</h3>
       <br />
       <input placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
       <br />
@@ -113,19 +80,6 @@ const Admin = () => {
       <br />
       <button onClick={handleCreateEmployee}>Create an Employee</button> 
       <br />
-      <div>
-        <h2>Send Admin Message</h2>
-        <textarea
-          value={adminMessage}
-          onChange={handleAdminMessageChange}
-          rows="4"
-          cols="50"
-          placeholder="Enter admin message..."
-        />
-        <br />
-        <button onClick={handleSendAdminMessage}>Send Message</button>
-      </div>
-      <EmpDetail />
     </div>
   );
 }

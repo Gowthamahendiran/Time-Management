@@ -121,7 +121,6 @@ const Dashboard = () => {
     }
   };
 
-  // Convert UTC timestamp to Indian Standard Time (IST) string
   const convertToIST = (utcTimestamp) => {
     return new Date(utcTimestamp).toLocaleString("en-IN", {
       timeZone: "Asia/Kolkata",
