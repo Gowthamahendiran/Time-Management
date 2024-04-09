@@ -5,6 +5,9 @@ import Dashboard from "./Dashboard/Dashboard";
 import SuperAdmin from "./SuperAdmin/SuperAdmin";
 import About from "./Dashboard/About";
 import AdminIndex from "./Admin/AdminIndex";
+import Admin from "./Admin/Admin";
+import History from "./Dashboard/History";
+import LeaveRequest from "./Dashboard/LeaveRequest";
 
 
 const App = () => {
@@ -16,6 +19,9 @@ const App = () => {
       <Route path="/Dashboard" element={<Dashboard />} />
       <Route path="/SuperAdmin" element={<SuperAdmin />} />
       <Route path="/dashboard/about" element={<About />} />
+      <Route path="/dashboard/history" element={<History /> } />
+      <Route path="/dashboard/leavereq" element={<LeaveRequest />} />
+      <Route path="/AddEmployee" element={<Admin />} />
     </Routes>
     </BrowserRouter>
     

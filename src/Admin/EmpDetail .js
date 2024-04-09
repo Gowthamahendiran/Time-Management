@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const EmpDetail = () => {
   const [employees, setEmployees] = useState([]);
@@ -6,7 +6,7 @@ const EmpDetail = () => {
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const response = await fetch('http://localhost:3000/employees');
+        const response = await fetch("http://localhost:3000/employees");
         if (response.ok) {
           const data = await response.json();
           setEmployees(data);
@@ -17,7 +17,6 @@ const EmpDetail = () => {
         console.error("Error:", error.message);
       }
     };
-
     fetchEmployees();
   }, []);
 
@@ -30,9 +29,8 @@ const EmpDetail = () => {
   return (
     <div>
       <h2>Employee Details:</h2>
-      <ul>
         {employees.map((employee, index) => (
-          <li key={index}>
+          <div>
             <button onClick={() => toggleAccordion(index)}>
               {employee.name}
             </button>
@@ -42,11 +40,10 @@ const EmpDetail = () => {
                 <p>Employee ID: {employee.employeeId}</p>
               </div>
             )}
-          </li>
+          </div>
         ))}
-      </ul>
     </div>
   );
-}
+};
 
 export default EmpDetail;

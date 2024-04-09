@@ -8,28 +8,8 @@ import { useNavigate } from "react-router-dom";
 const PathNote = ({ user }) => {
   const navigate = useNavigate()
 
-  const form = useRef();
-  const [fromDate, setFromDate] = useState(null);
-  const [toDate, setToDate] = useState(null);
-  const [reasonLeave, setReasonLeave] = useState("");
-  const [totalDays, setTotalDays] = useState(0);
-  const [message, setMessage] = useState("");
+
   const [adminMessage, setAdminMessage] = useState("");
-
-
-  const calculateTotalDays = () => {
-    if (!fromDate || !toDate) {
-      setTotalDays(0);
-      return;
-    }
-    const diffTime = toDate.getTime() - fromDate.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    setTotalDays(diffDays);
-  };
-
-  useEffect(() => {
-    calculateTotalDays();
-  }, [fromDate, toDate]);
 
   const fetchAdminMessage = async () => {
     try {
@@ -49,26 +29,8 @@ const PathNote = ({ user }) => {
     fetchAdminMessage();
   }, []);
 
-  const sendEmail = (e) => {
-    e.preventDefault();
-    emailjs
-      .sendForm(
-        "service_aye4c9j",
-        "template_8zlkf4r",
-        form.current,
-        "co7f_i3okxfv-a8bC"
-      )
-      .then((response) => {
-        console.log("Email sent successfully!", response);
-        handleLeaveClose();
-      })
-      .catch((error) => {
-        console.error("Error sending email:", error);
-      });
-  };
-
+  
   const [showNewsModal, setShowNewsModal] = useState(false);
-  const [LeaveRequest, SetLeaveRequest] = useState(false);
 
   const handleNewsClick = () => {
     setShowNewsModal(true);
@@ -78,16 +40,17 @@ const PathNote = ({ user }) => {
     setShowNewsModal(false);
   };
 
-  const handleLeaveOpen = () => {
-    SetLeaveRequest(true);
-  };
-
-  const handleLeaveClose = () => {
-    SetLeaveRequest(false);
-  };
 
   const handleAbout = () =>{
     navigate('/dashboard/about' ,{ state: {user}})
+  }
+
+  const handleHistory = () => {
+    navigate('/dashboard/history', {state : {user}})
+  }
+
+  const handleLeave = () => {
+    navigate('/dashboard/leavereq', {state: {user}})
   }
   return (
     <div className="path-note-card">
@@ -98,8 +61,8 @@ const PathNote = ({ user }) => {
         <button className="button-size" onClick={handleAbout}>About</button>
       </div>
       <div className="button-row">
-        <button className="button-size">Schedule</button>
-        <button className="button-size" onClick={handleLeaveOpen}>
+        <button className="button-size" onClick={handleHistory}>History</button>
+        <button className="button-size" onClick={handleLeave}>
           Leave Request
         </button>
       </div>
@@ -112,12 +75,11 @@ const PathNote = ({ user }) => {
               &times;
             </span>
             <h2>Updates</h2>
-            {/* Add your news content here */}
             <p>{adminMessage ? adminMessage : "No news at the moment."}</p>
           </div>
         </div>
       )}
-
+{/* 
       {LeaveRequest && (
         <div className="modal">
           <div className="modal-content">
@@ -189,7 +151,7 @@ const PathNote = ({ user }) => {
             </form>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

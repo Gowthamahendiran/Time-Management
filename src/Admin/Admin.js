@@ -48,10 +48,9 @@ const Admin = () => {
 
   return (
     <div>
-      <h3>Hello {user.name}</h3>
+      <h3>Hello {user.name}!</h3>
       {/* <img src={`http://localhost:3000/${user.profileImage}`} alt="ProfileImage" style={{width: '300px'}}/> */}
       <h3>Create a Employee</h3>
-      <br />
       <input placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
       <br />
       <input placeholder="Employee ID" value={employeeId} onChange={(e) => setEmployeeId(e.target.value)} />
