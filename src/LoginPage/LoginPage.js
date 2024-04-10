@@ -8,6 +8,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(""); // New state for handling errors
   const { setUser } = useAuth();
 
   const handleLogin = async () => {
@@ -32,9 +33,12 @@ const LoginPage = () => {
           navigate("/dashboard", { state: { user: userData.user } });
         }
       } else {
-        console.log("Error:", response.statusText);
+        const errorMessage = await response.text(); // Extract error message from response
+        setError(errorMessage); // Set error state
+        console.error("Error:", errorMessage);
       }
     } catch (error) {
+      setError("An error occurred while logging in. Please try again."); // Set generic error message
       console.error("Error:", error.message);
     }
   };
@@ -55,6 +59,7 @@ const LoginPage = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button onClick={handleLogin}>Login</button>
+        {error && <p className="error-message">{error.replace('{"message":"','').replace('"}','')}</p>} {/* Display error message without {"message":} */}
       </LoginCard>
     </div>
   );
