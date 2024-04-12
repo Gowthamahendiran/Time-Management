@@ -1,11 +1,11 @@
 import React from "react";
-import "./UserProfile.css";
-import UserProfileCard from "./USerprofileCard";
+import "./AdminProfile.css";
+import AdminProfileCard from "./AdminProfileCard";
 
-const UserProfile = ({ user }) => {
+const AdminProfile = ({ user }) => {
   return (
     <div className="row">
-      <UserProfileCard>
+      <AdminProfileCard>
       <div className="left">
           {user.profileImage && (
             <img
@@ -24,10 +24,9 @@ const UserProfile = ({ user }) => {
           </div>
 
         </div>
-        
-      </UserProfileCard>
+      </AdminProfileCard>
     </div>
   );
 };
 
-export default UserProfile;
+export default AdminProfile;

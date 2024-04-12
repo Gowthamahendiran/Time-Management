@@ -180,7 +180,7 @@ const AdminLeaveRequests = () => {
   const [leaveRequests, setLeaveRequests] = useState([]);
   const [AdminLeaveMessage, setAdminLeaveMessage] = useState("");
   const [selectedUser, setSelectedUser] = useState("");
-
+const [timeEntries, setTimeEntries] = useState("")
   useEffect(() => {
     const fetchLeaveRequests = async () => {
       try {
@@ -248,8 +248,7 @@ const AdminLeaveRequests = () => {
 
   return (
     <div>
-      <h2>Pending Leave Requests</h2>
-
+      <h2>Leave Requests by Employees</h2>
       <div>
         <select value={selectedUser} onChange={handleUserChange}>
           <option value="">All Employee</option>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 
-const About = () => {
+const AdminEdit = () => {
     const location = useLocation();
     const user = location.state && location.state.user;
 
@@ -192,4 +192,4 @@ const About = () => {
     );
 };
 
-export default About;
+export default AdminEdit;

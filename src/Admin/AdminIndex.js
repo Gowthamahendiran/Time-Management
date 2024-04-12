@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import EmpDetail from "./EmpDetail ";
-import SendAdminMessage from "./SendAdminMessage";
-import Admin from "./Admin";
 import AdminLogin from "./AdminLogin";
-import AdminLeave from "./AdminLeave";
+import AdminDashboard from "./AdminDashboard";
 const AdminIndex = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -18,11 +15,8 @@ const AdminIndex = () => {
 
   return (
     <div>
-      <Admin />
+      <AdminDashboard user={user} />
       <AdminLogin user={user} />
-      <SendAdminMessage />
-      <EmpDetail />
-      <AdminLeave />
     </div>
   );
 };

@@ -4,8 +4,8 @@
   width: 100%;
 }
 
-
-.left, .right {
+.left,
+.right {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,9 +20,10 @@
   padding-left: 10px; /* Adjust or remove if unnecessary */
 }
 
-.imagee {
-  max-width: 150px;
-  height: auto;
-  border-radius: 50%;
+.images {
+  max-width: 250px;
+  height: 200px;
+  object-fit: contain;
+  border-radius: 5%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
 }
