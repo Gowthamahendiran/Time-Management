@@ -78,7 +78,11 @@ const AdminLogin = () => {
       );
       if (response.ok) {
         setTimeIn(new Date());
-        setTimeOut(null); // Reset time out when time in is clicked
+      setTimeEntries(prevTimeEntries => [
+        ...prevTimeEntries,
+        { timeIn: new Date() }
+      ]);
+      setTimeOut(null); 
       } else {
         console.error("Error:", response.statusText);
       }
